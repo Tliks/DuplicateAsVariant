@@ -11,6 +11,10 @@ namespace Aoyon.DuplicateAsVariant
         private static void DuplicateAsVariantMenu()
         {
             GameObject originalObject = Selection.activeGameObject;
+            if (PrefabUtility.IsPartOfPrefabInstance(originalObject))
+            {
+                originalObject = PrefabUtility.GetOutermostPrefabInstanceRoot(originalObject);
+            }
 
             string folderPath = PrepareFolders(originalObject);
 
