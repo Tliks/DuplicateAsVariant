@@ -3,7 +3,7 @@
   "displayName": "Duplicate As Variant",
   "version": "1.0.0",
   "unity": "2022.3",
-  "description": "Duplicate Avatar as Prefab Variant, Repcale with Material Variant",
+  "description": "Duplicate Avatar as Prefab Variant, Replace with Material Variant",
   "author": {
     "name": "Ao_425",
     "url": "https://github.com/Tliks"
