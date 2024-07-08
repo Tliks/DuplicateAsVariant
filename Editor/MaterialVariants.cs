@@ -7,44 +7,52 @@ namespace Aoyon.DuplicateAsVariant
 {
     public class DuplicateWithMaterialVariants 
     {
-        [MenuItem("GameObject/Duplicate as Variant", false, 0)]
+        [MenuItem("GameObject/Duplicate with Material variants", false, 0)]
         private static void DuplicateAsVariantMenu()
         {
             GameObject originalObject = Selection.activeGameObject;
-            if (PrefabUtility.IsPartOfPrefabInstance(originalObject))
-            {
-                originalObject = PrefabUtility.GetOutermostPrefabInstanceRoot(originalObject);
-            }
+
+            GameObject instance = CreatePrefabInstance();
 
             string folderPath = PrepareFolders(originalObject);
 
-            GameObject prefabRoot = CreatePrefabVariant(originalObject, folderPath);
+            SetInstanceName(instance, folderPath);
 
-            CreateMaterialVariants(prefabRoot, folderPath);
+            CreateMaterialVariants(instance, folderPath);
 
-            FinalizePrefab(prefabRoot, originalObject);
+            EditorGUIUtility.PingObject(instance);
 
             Debug.Log("Saved prefab and materials to " + folderPath);
         }
 
+        private static GameObject CreatePrefabInstance()
+        {
+            //Unsupported.DuplicateGameObjectsUsingPasteboard();
+            SceneView.lastActiveSceneView.SendEvent(EditorGUIUtility.CommandEvent("Duplicate"));
+
+            GameObject instance = Selection.activeGameObject;
+            Selection.activeGameObject = null;
+            return instance;
+        }
+
         private static string PrepareFolders(GameObject originalObject)
         {
-            CreateParent("Assets/Variants");
-            string folderPath = AssetDatabase.GenerateUniqueAssetPath($"Assets/Variants/{originalObject.name}_Variant");
-            CreateParent(folderPath);
+            CreateFolder("Assets/Material Variants");
+            string folderPath = AssetDatabase.GenerateUniqueAssetPath($"Assets/Material Variants/{originalObject.name}");
+            CreateFolder(folderPath);
             return folderPath;
         }
 
-        private static GameObject CreatePrefabVariant(GameObject originalObject, string folderPath)
+        private static void SetInstanceName(GameObject instance, string folderPath)
         {
             string[] parts = folderPath.Split('/');
-            return PrefabUtility.SaveAsPrefabAsset(originalObject, folderPath + "/" + parts[parts.Length - 1] + ".prefab");
+            instance.name = parts[parts.Length - 1];
         }
 
-        private static void CreateMaterialVariants(GameObject prefabRoot, string folderPath)
+        private static void CreateMaterialVariants(GameObject instance, string folderPath)
         {
             var materialCache = new Dictionary<Material, Material>();
-            var renderers = prefabRoot.GetComponentsInChildren<Renderer>();
+            var renderers = instance.GetComponentsInChildren<Renderer>();
 
             foreach (var renderer in renderers)
             {
@@ -69,18 +77,7 @@ namespace Aoyon.DuplicateAsVariant
             }
         }
 
-        private static void FinalizePrefab(GameObject variantRoot, GameObject originalObject)
-        {
-            PrefabUtility.SavePrefabAsset(variantRoot);
-            GameObject instance = PrefabUtility.InstantiatePrefab(variantRoot) as GameObject;
-            SceneManager.MoveGameObjectToScene(instance, originalObject.scene);
-            EditorGUIUtility.PingObject(instance);
-
-            Selection.activeGameObject = variantRoot;
-            EditorUtility.FocusProjectWindow();
-        }
-
-        public static void CreateParent(string path)
+        public static void CreateFolder(string path)
         {
             if (!AssetDatabase.IsValidFolder(path))
             {
