@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Aoyon.DuplicateAsVariant
 {
@@ -12,27 +11,11 @@ namespace Aoyon.DuplicateAsVariant
         {
             GameObject originalObject = Selection.activeGameObject;
 
-            GameObject instance = CreatePrefabInstance();
-
             string folderPath = PrepareFolders(originalObject);
 
-            SetInstanceName(instance, folderPath);
+            CreateMaterialVariants(originalObject, folderPath);
 
-            CreateMaterialVariants(instance, folderPath);
-
-            EditorGUIUtility.PingObject(instance);
-
-            Debug.Log("Saved prefab and materials to " + folderPath);
-        }
-
-        private static GameObject CreatePrefabInstance()
-        {
-            //Unsupported.DuplicateGameObjectsUsingPasteboard();
-            SceneView.lastActiveSceneView.SendEvent(EditorGUIUtility.CommandEvent("Duplicate"));
-
-            GameObject instance = Selection.activeGameObject;
-            Selection.activeGameObject = null;
-            return instance;
+            Debug.Log("Saved materials to " + folderPath);
         }
 
         private static string PrepareFolders(GameObject originalObject)
@@ -41,12 +24,6 @@ namespace Aoyon.DuplicateAsVariant
             string folderPath = AssetDatabase.GenerateUniqueAssetPath($"Assets/Material Variants/{originalObject.name}");
             CreateFolder(folderPath);
             return folderPath;
-        }
-
-        private static void SetInstanceName(GameObject instance, string folderPath)
-        {
-            string[] parts = folderPath.Split('/');
-            instance.name = parts[parts.Length - 1];
         }
 
         private static void CreateMaterialVariants(GameObject instance, string folderPath)
