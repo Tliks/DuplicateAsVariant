@@ -9,6 +9,7 @@
     "url": "https://github.com/Tliks"
   },
   "url": "https://github.com/Tliks/DuplicateAsVariant",
+  "changelogUrl": "https://github.com/Tliks/DuplicateAsVariant/blob/master/CHANGELOG.md",
   "vpmDependencies": {
     "com.vrchat.avatars": ">=3.0.0"
   }
