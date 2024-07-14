@@ -1,9 +1,9 @@
 {
   "name": "com.aoyon.duplicate-as-variant",
-  "displayName": "Duplicate As Variant",
+  "displayName": "Convert to Material Variant",
   "version": "1.0.1",
   "unity": "2022.3",
-  "description": "Duplicate Avatar as Prefab Variant, Replace with Material Variant",
+  "description": "Convert to Material Variant",
   "author": {
     "name": "Ao_425",
     "url": "https://github.com/Tliks"

@@ -15,7 +15,8 @@
 
 ## [2.0.0] - 2024-07-14
 ### Changed
-- "Duplicate with Material variants" to "Convert to Material variant"
+- menuitem changed from "Duplicate with Material variants" to "Convert to Material variant"
+- displayname changed from "Duplicate As Variant" to "Convert to Material Variant"
 
 ### Removed
 - instanciate PrefabInstance
