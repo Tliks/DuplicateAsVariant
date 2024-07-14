@@ -1,4 +1,4 @@
-# DuplicateAsVariant
+# Convert to Material Variant
 
 ## 概要
 Material Variantの作成及び置き換えを行うUnity Editor拡張です。
