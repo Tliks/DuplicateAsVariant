@@ -6,7 +6,7 @@ namespace Aoyon.DuplicateAsVariant
 {
     public class DuplicateWithMaterialVariants 
     {
-        [MenuItem("GameObject/Duplicate with Material variants", false, 0)]
+        [MenuItem("GameObject/Convert to Material Variant", false, 0)]
         private static void DuplicateAsVariantMenu()
         {
             GameObject originalObject = Selection.activeGameObject;

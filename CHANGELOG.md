@@ -13,6 +13,13 @@
 
 ### Security
 
+## [2.0.0] - 2024-07-14
+### Changed
+- "Duplicate with Material variants" to "Convert to Material variant"
+
+### Removed
+- instanciate PrefabInstance
+
 ## [1.0.1] - 2024-07-08
 ### Fixed
 - json parsing error in asmdef
