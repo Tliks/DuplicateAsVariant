@@ -1,7 +1,7 @@
 {
   "name": "com.aoyon.duplicate-as-variant",
   "displayName": "Convert to Material Variant",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "unity": "2022.3",
   "description": "Convert to Material Variant",
   "author": {
